@@ -28,6 +28,7 @@ namespace Parrot_Challenge
 		private void frmLogin_Load(object sender, EventArgs e)
 		{
 			textbox_TextChanged(sender, e);
+			btnCancel.Top = -50;
 		}
 
 		private void textbox_TextChanged(object sender, EventArgs e)
@@ -62,6 +63,11 @@ namespace Parrot_Challenge
 			catch (Exception pE) {
 				MessageBox.Show($"{pE.Message} \r\n { pE.StackTrace}");
 			}
+		}
+
+		private void btnCancel_Click(object sender, EventArgs e)
+		{
+			this.DialogResult = DialogResult.Cancel;
 		}
 	}
 }

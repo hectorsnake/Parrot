@@ -32,6 +32,7 @@
 			this.label2 = new System.Windows.Forms.Label();
 			this.txtPassword = new System.Windows.Forms.TextBox();
 			this.btnLogin = new System.Windows.Forms.Button();
+			this.btnCancel = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// txtUser
@@ -78,11 +79,25 @@
 			this.btnLogin.UseVisualStyleBackColor = true;
 			this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
 			// 
+			// btnCancel
+			// 
+			this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+			this.btnCancel.Location = new System.Drawing.Point(10, 231);
+			this.btnCancel.Name = "btnCancel";
+			this.btnCancel.Size = new System.Drawing.Size(75, 23);
+			this.btnCancel.TabIndex = 5;
+			this.btnCancel.Text = "Cancel";
+			this.btnCancel.UseVisualStyleBackColor = true;
+			this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+			// 
 			// frmLogin
 			// 
+			this.AcceptButton = this.btnLogin;
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.CancelButton = this.btnCancel;
 			this.ClientSize = new System.Drawing.Size(279, 304);
+			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnLogin);
 			this.Controls.Add(this.txtPassword);
 			this.Controls.Add(this.label2);
@@ -90,7 +105,7 @@
 			this.Controls.Add(this.txtUser);
 			this.MaximizeBox = false;
 			this.Name = "frmLogin";
-			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Login";
 			this.Load += new System.EventHandler(this.frmLogin_Load);
 			this.ResumeLayout(false);
@@ -105,6 +120,7 @@
 		private System.Windows.Forms.Label label2;
 		private System.Windows.Forms.TextBox txtPassword;
 		private System.Windows.Forms.Button btnLogin;
+		private System.Windows.Forms.Button btnCancel;
 	}
 }
 
