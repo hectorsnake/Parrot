@@ -10,6 +10,7 @@ namespace Parrot_Challenge.Repository
 	public interface IDataService
 	{
 		Task<LoginResponse> Login(User pUser);
+		Task<RefreshTokenResponse> RefreshToken(string pRefresh);
 
 		Task<StoresResponse> GetMyStores();
 

@@ -46,9 +46,6 @@ namespace Parrot_Challenge
 					password = txtPassword.Text
 				};
 
-				user.username = "android-challenge@parrotsoftware.io";
-				user.password = "8mngDhoPcB3ckV7X";
-
 				var response = await _dataService.Login(user);
 
 				if (response != null) {

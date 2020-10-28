@@ -25,11 +25,22 @@ namespace Parrot_Challenge.Controls
 					lblCategory.Text = _product.Category?.Name;
 					lblName.Text = _product.Name;
 					lblPrice.Text = String.Format("$ {0:#,##0.00}", _product.Price);
-					chkStatus.Checked = _product.Availability == "AVAILABLE";
-					chkStatus.Text = " " + _product.Availability;
+					setAvailability(_product.Availability);
 					imgMain.Load(_product.ImageUrl);
 				}
 			}
+		}
+
+		private void setAvailability(string pAvailability)
+		{
+			bool availability = pAvailability == "AVAILABLE";
+			chkStatus.Checked = availability;
+			chkStatus.Text = " " + pAvailability;
+			lblCategory.Enabled = availability;
+			lblName.Enabled = availability;
+			lblPrice.Enabled = availability;
+			lblStatus.Enabled = availability;
+			imgMain.Enabled = availability;
 		}
 
 		public ctrlProduct()
@@ -53,7 +64,7 @@ namespace Parrot_Challenge.Controls
 
 				if (value != _product.Availability) {
 					_product.Availability = value;
-					chkStatus.Text = value;
+					setAvailability(_product.Availability);
 					_product.RaiseAvailabilityChanged(_product.Availability);
 				}
 			} catch (Exception pE) {

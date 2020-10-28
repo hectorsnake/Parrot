@@ -91,6 +91,8 @@
 			this.lblCategory.Size = new System.Drawing.Size(49, 13);
 			this.lblCategory.TabIndex = 5;
 			this.lblCategory.Text = "Category";
+			this.lblCategory.UseMnemonic = false;
+			this.lblCategory.Visible = false;
 			// 
 			// ctrlProduct
 			// 

@@ -29,6 +29,19 @@ namespace Parrot_Challenge.Repository
 			return await _genericRepository.PostAsync<User, LoginResponse>(builder.ToString(), pUser, _session.Token);
 		}
 
+		
+		public async Task<RefreshTokenResponse> RefreshToken(string pRefresh)
+		{
+			UriBuilder builder = new UriBuilder(ApiConstants.BaseApiUrl) {
+				Path = ApiConstants.PostRefreshEndpoint
+			};
+
+			RefreshTokenRequest refreshRequest = new RefreshTokenRequest();
+			refreshRequest.refresh = pRefresh;
+
+			return await _genericRepository.PostAsync<RefreshTokenRequest, RefreshTokenResponse>(builder.ToString(), refreshRequest, _session.Token);
+		}
+
 		public async Task<StoresResponse> GetMyStores()
 		{
 			UriBuilder builder = new UriBuilder(ApiConstants.BaseApiUrl) {

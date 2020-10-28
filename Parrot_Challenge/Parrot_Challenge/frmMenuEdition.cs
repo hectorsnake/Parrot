@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Parrot_Challenge.Controls;
+using Parrot_Challenge.Exceptions;
 using Parrot_Challenge.Models;
 using Parrot_Challenge.Repository;
 using System;
@@ -26,6 +27,7 @@ namespace Parrot_Challenge
 			InitializeComponent();
 			_session = pSession;
 			_dataService = pDataService;
+			lblLoading.Visible = false;
 		}
 
 		private async void frmMenuEdition_Load(object sender, EventArgs e)
@@ -49,7 +51,11 @@ namespace Parrot_Challenge
 					_store = storesResponse.Result?.Stores.FirstOrDefault();
 					btnRefresh_Click(sender, e);
 				}
-			} catch (Exception pE) {
+			}
+			catch (ServiceUnauthorizedException pE) {
+				showLogin();
+			}
+			catch (Exception pE) {
 				MessageBox.Show($"{pE.Message}\r\n{pE.StackTrace}");
 			}
 		}
@@ -102,6 +108,8 @@ namespace Parrot_Challenge
 				}
 
 				flowLayoutPanel1.Controls.Clear();
+				btnRefresh.Enabled = false;
+				lblLoading.Visible = true;
 
 				lblStoreName.Text = _store.Name;
 				ProductsResponse productsResponse = await _dataService.GetProducts(_store.Uuid);
@@ -120,8 +128,15 @@ namespace Parrot_Challenge
 					ctrl.Products = products.FindAll(p => p.Category.Uuid == category.Uuid);
 				}
 			}
+			catch (ServiceUnauthorizedException pE) {
+				showLogin();
+			}
 			catch (Exception pE) {
 				MessageBox.Show($"{pE.Message}\r\n{pE.StackTrace}");
+			}
+			finally {
+				btnRefresh.Enabled = true;
+				lblLoading.Visible = false;
 			}
 		}
 
@@ -131,6 +146,20 @@ namespace Parrot_Challenge
 				ProductResponse productResponse = await _dataService.UpdateProductAvailability(pProduct.Uuid, pAvailability);
 				if (productResponse != null && productResponse.Result != null) {
 					pProduct.Availability = productResponse.Result.Availability;
+				}
+			} catch (Exception pE) {
+				MessageBox.Show($"{pE.Message}\r\n{pE.StackTrace}");
+			}
+		}
+
+		private async void tmrRefreshToken_Tick(object sender, EventArgs e)
+		{
+			try {
+				
+				var response = await _dataService.RefreshToken(_session.Refresh);
+				if (response != null) {
+					_session.Token = response.Access;
+					_session.Refresh = response.Refresh;
 				}
 			} catch (Exception pE) {
 				MessageBox.Show($"{pE.Message}\r\n{pE.StackTrace}");

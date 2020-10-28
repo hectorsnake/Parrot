@@ -23,7 +23,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>2</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -112,6 +112,8 @@
     <Compile Include="Models\ProductResponse.cs" />
     <Compile Include="Models\ProductsResponse.cs" />
     <Compile Include="Models\Provider.cs" />
+    <Compile Include="Models\RefreshTokenRequest.cs" />
+    <Compile Include="Models\RefreshTokenResponse.cs" />
     <Compile Include="Models\Store.cs" />
     <Compile Include="Models\StoresResponse.cs" />
     <Compile Include="Models\UpdateProductAvailability.cs" />
